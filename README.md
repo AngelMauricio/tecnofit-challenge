@@ -10,7 +10,7 @@ Esta é uma API RESTful desenvolvida em PHP 8.3 (sem frameworks) para gerenciar 
 
 ### Passo a passo
 1. Clone o repositório:
-   git clone https://github.com/seu-usuario/tecnofit-challenge.git
+   git clone https://github.com/AngelMauricio/tecnofit-challenge.git
    cd tecnofit-challenge
 
 2. Suba os containers:
