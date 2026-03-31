@@ -1,0 +1,32 @@
+services:
+  app:
+    image: php:8.3-apache
+    container_name: tecnofit-app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./public:/var/www/html
+      - ./src:/var/www/src
+    command: >
+      sh -c "docker-php-ext-install pdo pdo_mysql && a2enmod rewrite && apache2-foreground"
+    networks:
+      - tecnofit-network
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: tecnofit-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: tecnofit_db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    networks:
+      - tecnofit-network
+    command: --default-authentication-plugin=mysql_native_password
+
+networks:
+  tecnofit-network:
+    driver: bridge

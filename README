@@ -1,0 +1,52 @@
+# Tecnofit Challenge - Ranking API
+
+Esta é uma API RESTful desenvolvida em PHP 8.3 (sem frameworks) para gerenciar e visualizar rankings de performance em movimentos de Crossfit. O projeto utiliza Docker para garantir que o ambiente de execução seja idêntico em qualquer máquina.
+
+## 🚀 Como rodar o projeto
+
+### Pré-requisitos
+* Docker e Docker Compose instalados.
+* Porta 8080 (HTTP) e 3306 (MySQL) disponíveis no host.
+
+### Passo a passo
+1. Clone o repositório:
+   git clone https://github.com/seu-usuario/tecnofit-challenge.git
+   cd tecnofit-challenge
+
+2. Suba os containers:
+   docker compose up -d
+
+*Este comando irá baixar as imagens, configurar o Apache, instalar as extensões do PHP (PDO MySQL) e popular o banco de dados automaticamente através do script em ./sql/setup.sql.*
+
+---
+
+## 🛠️ Tecnologias e Conceitos
+* PHP 8.3 Apache: Configurado com mod_rewrite e strict_types=1.
+* MySQL 8.0: Utilizando o plugin de autenticação nativo para compatibilidade.
+* Docker: Ambiente isolado e reprodutível.
+* Window Functions (SQL): Uso de RANK() e ROW_NUMBER() para cálculo de ranking performático diretamente no banco de dados.
+
+---
+
+## 📡 Como utilizar a API
+
+A API utiliza um padrão de Front Controller, onde todas as requisições são roteadas pelo public/index.php.
+
+Endpoint: GET /api/movement/{identifier}
+
+* {identifier}: Pode ser o ID numérico do movimento ou o Nome (ex: Deadlift ou Back Squat).
+* A busca por nome é case-insensitive e aceita espaços (URL encoded).
+
+---
+
+## 📂 Estrutura de Diretórios
+* public/: Única pasta exposta ao servidor web. Contém o index.php e .htaccess.
+* src/: Lógica da aplicação (Controllers, Repositories, Config). Protegida contra acesso direto.
+* sql/: Script de criação das tabelas e inserts iniciais.
+
+---
+
+## 📝 Notas Técnicas
+* Segurança: Proteção contra SQL Injection via Prepared Statements (PDO).
+* Performance: O ranking lida com o "buraco" de posições em caso de empate (ex: 1, 1, 3) e garante que a data exibida seja exatamente a do recorde máximo de cada usuário.
+* Arquitetura: Implementação de Injeção de Dependência no Repository e Autoloader manual seguindo padrões PSR.

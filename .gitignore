@@ -1,0 +1,15 @@
+# Docker
+docker/db_data/
+mysql/
+
+# IDEs
+.idea/
+.vscode/
+
+# PHP/Logs
+*.log
+vendor/
+
+# OS
+.DS_Store
+Thumbs.db
