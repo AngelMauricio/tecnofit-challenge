@@ -20,10 +20,16 @@ class MovementController {
         try {
             $this->Repository->get($identifier);
         } catch (\Exception $e) {
-            http_response_code($e->getCode());
-            return ['error' => $e->getMessage()];
+            if (is_numeric($e->getCode())) {
+                http_response_code($e->getCode());
+                return ['error' => $e->getMessage()];
+            } else {
+                http_response_code(500);
+                return ['error' => "Unexpected server error"];
+            }
         }
 
+        http_response_code(200);
         $rankingData = $this->Repository->getRanking($identifier);
         return $rankingData;
     }
