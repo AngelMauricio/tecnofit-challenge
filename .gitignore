@@ -13,3 +13,6 @@ vendor/
 # OS
 .DS_Store
 Thumbs.db
+
+# PHPUnit
+.phpunit.cache/

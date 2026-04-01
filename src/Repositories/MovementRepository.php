@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace Repositories;
+namespace App\Repositories;
 
 use PDO;
 
@@ -28,7 +28,7 @@ class MovementRepository
         $stmt->execute(['arg' => $identifier]);
 
         $object = $stmt->fetchObject();
-        if (! $object) {
+        if (!$object) {
             throw new \Exception('Movement not found', 404);
         }
         return $object;

@@ -1,11 +1,12 @@
 <?php
 declare(strict_types=1);
 define('BASE_PATH', dirname(__DIR__));
+require_once BASE_PATH . '/vendor/autoload.php';
 require_once BASE_PATH . '/src/config.php';
 
 // Autoload
 spl_autoload_register(function ($class) {
-    $file = BASE_PATH . '/src/' . str_replace('\\', '/', $class) . '.php';
+    $file = BASE_PATH . '/src/' . str_replace('\\', '/', str_replace('App\\', '', $class)) . '.php';
     if (file_exists($file)) {
         require_once $file;
     }
@@ -44,8 +45,8 @@ $resource = ucfirst($uri[1] ?? null);
 $parameter = $uri[2] ?? null;
 $method = $_SERVER['REQUEST_METHOD'];
 
-$controllerClass = "Controllers\\{$resource}Controller";
-$repositoryClass = "Repositories\\{$resource}Repository";
+$controllerClass = "App\\Controllers\\{$resource}Controller";
+$repositoryClass = "App\\Repositories\\{$resource}Repository";
 
 if (class_exists($controllerClass) && class_exists($repositoryClass)) {
     $repository = new $repositoryClass($pdo);

@@ -1,6 +1,3 @@
-/* DROP TABLE IF EXISTS `personal_record`;
-DROP TABLE IF EXISTS `movement`;
-DROP TABLE IF EXISTS `user`; */
 CREATE TABLE `user` (
 `id` int NOT NULL AUTO_INCREMENT,
 `name` varchar(255) NOT NULL,
